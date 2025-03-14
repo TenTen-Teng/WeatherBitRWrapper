@@ -4,9 +4,6 @@ library(jsonlite)
 library(dplyr)
 library(glue)
 
-source("R/constant.R")
-source("R/utils.R")
-
 # Set up endpoint for forecast API.
 endpoint <- "forecast/daily"
 endpoint_name <- "forecast"
@@ -63,39 +60,39 @@ get_forecast_by_city <- function(
 
   if (response$status_code != 200){
     # Extract content as text
-    content_data <- content(response, as = "text", encoding = "UTF-8")  
+    content_data <- content(response, as = "text", encoding = "UTF-8")
 
     # Convert JSON string to R list
-    json_data <- fromJSON(content_data)  
+    json_data <- fromJSON(content_data)
 
     # Extract the error message
     error_message <- json_data$error
     stop(
         glue(
-            "Error: Connect to API request failed :(\n", " Status code is", 
+            "Error: Connect to API request failed :(\n", " Status code is",
             response$status_code, "\n", " Error message is", error_message
             )
         )
     } else {
           print("Connect WeatherBit API success!")
     }
-  
+
   # Convert reponse to a dataframe.
   dataframe <- fromJSON(content(response, "text", encoding = "UTF-8")) %>% as.data.frame
 
   if (save_dir != ''){
     params = c(
-      dataframe$city_name[1], 
-      dataframe$data.datetime[1], 
+      dataframe$city_name[1],
+      dataframe$data.datetime[1],
       tail(dataframe$data.datetime, 1)[[1]]
       )
 
     save_csv(
-      dataframe = dataframe, dir = save_dir, 
+      dataframe = dataframe, dir = save_dir,
       endpoint = endpoint_name, params = params
       )
   }
-    
+
   return(dataframe)
 }
 
@@ -155,41 +152,41 @@ get_forecast_by_lat_lon <- function(
 
   if (response$status_code != 200){
     # Extract content as text
-    content_data <- content(response, as = "text", encoding = "UTF-8")  
+    content_data <- content(response, as = "text", encoding = "UTF-8")
 
     # Convert JSON string to R list
-    json_data <- fromJSON(content_data)  
+    json_data <- fromJSON(content_data)
 
     # Extract the error message
     error_message <- json_data$error
     stop(
         glue(
-            "Error: Connect to API request failed :(\n", " Status code is", 
+            "Error: Connect to API request failed :(\n", " Status code is",
             response$status_code, "\n", " Error message is", error_message
             )
         )
     } else {
           print("Connect WeatherBit API success!")
     }
-  
+
   # Convert reponse to a dataframe.
   dataframe <- fromJSON(content(response, "text", encoding = "UTF-8")) %>% as.data.frame
 
   # Save to CSV.
   if (save_dir != ''){
     params = c(
-      dataframe$lat[1], 
-      dataframe$lon[1], 
+      dataframe$lat[1],
+      dataframe$lon[1],
       dataframe$data.datetime[1],
       tail(dataframe$data.datetime, 1)[[1]]
       )
 
     save_csv(
-      dataframe = dataframe, dir = save_dir, 
+      dataframe = dataframe, dir = save_dir,
       endpoint = endpoint_name, params = params
       )
   }
- 
+
   return(dataframe)
 }
 
@@ -244,41 +241,41 @@ get_forecast_by_postal_code <- function(
 
   if (response$status_code != 200){
     # Extract content as text
-    content_data <- content(response, as = "text", encoding = "UTF-8")  
+    content_data <- content(response, as = "text", encoding = "UTF-8")
 
     # Convert JSON string to R list
-    json_data <- fromJSON(content_data)  
+    json_data <- fromJSON(content_data)
 
     # Extract the error message
     error_message <- json_data$error
     stop(
         glue(
-            "Error: Connect to API request failed :(\n", " Status code is", 
+            "Error: Connect to API request failed :(\n", " Status code is",
             response$status_code, "\n", " Error message is", error_message
             )
         )
     } else {
           print("Connect WeatherBit API success!")
     }
-  
+
   # Convert reponse to a dataframe.
   dataframe <- fromJSON(content(response, "text", encoding = "UTF-8")) %>% as.data.frame
 
   # Save to CSV.
   if (save_dir != ''){
     params <- c(
-      postal_code, 
-      dataframe$country_code[1], 
+      postal_code,
+      dataframe$country_code[1],
       dataframe$data.datetime[1],
       tail(dataframe$data.datetime, 1)[[1]]
       )
 
     save_csv(
-      dataframe = dataframe, dir = save_dir, 
+      dataframe = dataframe, dir = save_dir,
       endpoint = endpoint_name, params = params
       )
   }
-    
+
   return(dataframe)
 }
 
@@ -332,40 +329,40 @@ get_forecast_by_city_id <- function(
 
   if (response$status_code != 200){
     # Extract content as text
-    content_data <- content(response, as = "text", encoding = "UTF-8")  
+    content_data <- content(response, as = "text", encoding = "UTF-8")
 
     # Convert JSON string to R list
-    json_data <- fromJSON(content_data)  
+    json_data <- fromJSON(content_data)
 
     # Extract the error message
     error_message <- json_data$error
     stop(
         paste(
-            "Error: Connect to API request failed :(\n", " Status code is", 
+            "Error: Connect to API request failed :(\n", " Status code is",
             response$status_code, "\n", " Error message is", error_message
             )
         )
     } else {
           print("Connect WeatherBit API success!")
     }
-  
+
   # Convert reponse to a dataframe.
   dataframe <- fromJSON(content(response, "text", encoding = "UTF-8")) %>% as.data.frame
 
   # Save to CSV.
   if (save_dir != ''){
     params <- c(
-      city_id, 
+      city_id,
       dataframe$data.datetime[1],
       tail(dataframe$data.datetime, 1)[[1]]
       )
 
     save_csv(
-      dataframe = dataframe, dir = save_dir, 
+      dataframe = dataframe, dir = save_dir,
       endpoint = endpoint_name, params = params
       )
   }
-    
+
   return(dataframe)
 }
 

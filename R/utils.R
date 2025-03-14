@@ -1,5 +1,4 @@
 # Helpful functions.
-source("R/constant.R")
 
 # Connect API key function.
 connect_api_key <- function(){
@@ -21,7 +20,7 @@ save_csv <- function(dataframe, dir = '', endpoint = '', params = c()){
     # Create directory.
     if (!file.exists(dir)){
       dir.create(dir)
-    } 
+    }
 
     # Generate file name.
     file_name <- ''
