@@ -41,3 +41,37 @@ process_api_response <- function(response) {
   
   return(data)
 }
+
+# Function to get current temperature
+get_current_temperature <- function(location, api_key, by = "city", save_dir = "") {
+  if (!connect_api_key()) stop("Error: API key is missing. Set up your WeatherBit API key.")
+  validate_location(location, by)
+  
+  params <- list(key = api_key)
+  if (by == "city") {
+    params$city <- location
+  } else if (by == "latlon") {
+    coords <- unlist(strsplit(location, ","))
+    params$lat <- coords[1]
+    params$lon <- coords[2]
+  } else if (by == "postal") {
+    params$postal_code <- location
+  }
+  
+  response <- GET(current_weather_url, query = params)
+  data <- process_api_response(response)
+  
+  result <- tibble(
+    city = data$city_name,
+    country = data$country_code,
+    temperature_C = data$temp,
+    feels_like_C = data$app_temp,
+    dew_point_C = data$dewpt
+  )
+  
+  if (save_dir != "") {
+    save_csv(result, save_dir, endpoint = "current_weather", params = c(location))
+  }
+  
+  return(result)
+}
