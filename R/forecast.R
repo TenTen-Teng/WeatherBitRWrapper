@@ -4,9 +4,14 @@ library(jsonlite)
 library(dplyr)
 library(glue)
 
+#sys.source("R/constant.R", envir = globalenv())
+#sys.source("R/utils.R", envir = globalenv())
+
+
 # Set up endpoint for forecast API.
 endpoint <- "forecast/daily"
 endpoint_name <- "forecast"
+
 
 # Get forecast url.
 forecast_url <- glue(base_url, endpoint)

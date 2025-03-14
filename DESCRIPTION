@@ -3,14 +3,18 @@ Type: Package
 Title: What the Package Does (Title Case)
 Version: 0.1.0
 Authors@R: c(
-    person(
-      "Jane", "Doe",
-      email = "jane@example.com",
-      role = c("aut", "cre")
+    person("Luna", "Yu", email = "minjuyu@student.ubc.ca", role = c("aut", "ctb", "cph")),
+    person("Yuzhu", "Han", email = "yz031326@student.ubc.ca", role = c("aut", "ctb", "cph")),
+    person("Teng", "Li", email = "tengli11@student.ubc.ca", role = c("aut", "cre", "ctb", "cph"))
     )
-  )
 Description: More about what it does (maybe more than one line).
     Continuation lines should be indented.
 License: What license is it under?
 Encoding: UTF-8
 LazyData: true
+RoxygenNote: 7.3.2
+Suggests: 
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
+Imports:
+    glue
