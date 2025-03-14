@@ -109,3 +109,37 @@ get_current_wind <- function(location, api_key, by = "city", save_dir = "") {
   
   return(result)
 }
+
+# Function to get current precipitation
+get_current_precipitation <- function(location, api_key, by = "city", save_dir = "") {
+  if (!connect_api_key()) stop("Error: API key is missing. Set up your WeatherBit API key.")
+  validate_location(location, by)
+  
+  params <- list(key = api_key)
+  if (by == "city") {
+    params$city <- location
+  } else if (by == "latlon") {
+    coords <- unlist(strsplit(location, ","))
+    params$lat <- coords[1]
+    params$lon <- coords[2]
+  } else if (by == "postal") {
+    params$postal_code <- location
+  }
+  
+  response <- GET(current_weather_url, query = params)
+  data <- process_api_response(response)
+  
+  result <- tibble(
+    city = data$city_name,
+    country = data$country_code,
+    precipitation_mm = ifelse(is.null(data$precip), 0, data$precip),
+    humidity_percent = data$rh,
+    cloud_coverage_percent = data$clouds
+  )
+  
+  if (save_dir != "") {
+    save_csv(result, save_dir, endpoint = "current_weather", params = c(location))
+  }
+  
+  return(result)
+}
