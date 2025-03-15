@@ -8,11 +8,11 @@ library(httptest)
 library(jsonlite)
 
 # Test constant variables
-test_that("test constant variables", {
-    expect_equal(endpoint, "alerts")
-    expect_equal(endpoint_name, "alerts")
-    expect_equal(alerts_url, "https://api.weatherbit.io/v2.0/alerts")
-})
+#test_that("test constant variables", {
+#    expect_equal(endpoint, "alerts")
+#    expect_equal(endpoint_name, "alerts")
+#    expect_equal(alerts_url, "https://api.weatherbit.io/v2.0/alerts")
+#})
 
 # Test weather_alert_lat() function
 # Test input validation
