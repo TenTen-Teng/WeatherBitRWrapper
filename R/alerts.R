@@ -2,11 +2,12 @@
 library(httr)
 library(jsonlite)
 
-source("constant.R")
-source("utils.R")
+sys.source("R/constant.R", envir = globalenv())
+sys.source("R/utils.R", envir = globalenv())
 
 # Set up endpoint for alerts API
 endpoint <- "alerts"
+endpoint_name <- "alerts"
 
 # Get alerts url
 alerts_url <- paste(base_url, endpoint, sep='')
@@ -28,7 +29,7 @@ weather_alert_lat <- function(lat, lon, save_dir = ''){
   params <- list(
     lat = lat,
     lon = lon,
-    key = api_key
+    key = api_key()
   )
   
   # Request API
@@ -107,12 +108,7 @@ weather_alert_city <- function(city, state = NULL, country = NULL, save_dir = ''
   if (missing(city)) {
     stop("Parameter 'city' is required.")
   }
-  
-  # handle the optional parameter
-  if (is.null(state) && is.null(country)) {
-    stop("Error: The API requires either a state or a country along with the city name.")
-  }
-  
+
   # Construct city parameter with state if provided
   if (!is.null(state)) {
     # Replace spaces with "+" for multi-word states
@@ -125,7 +121,7 @@ weather_alert_city <- function(city, state = NULL, country = NULL, save_dir = ''
   # Set parameters 
   params <- list(
     city = city_param,
-    key = api_key
+    key = api_key()
   )
   
   # Add the optional parameter 
@@ -213,7 +209,7 @@ weather_alert_postal <- function(postal_code, country = NULL, save_dir = ''){
   # Set parameters 
   params <- list(
     postal_code = postal_code,
-    key = api_key
+    key = api_key()
   )
   
   # Add the optional parameter 
@@ -301,7 +297,7 @@ weather_alert_id <- function(city_id, save_dir = ''){
   # Set parameters 
   params <- list(
     city_id = city_id,
-    key = api_key
+    key = api_key()
   )
   
   # Request API

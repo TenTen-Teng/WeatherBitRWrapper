@@ -3,7 +3,7 @@
 # Connect API key function.
 connect_api_key <- function(){
   # Check API key.
-  if (api_key == ''){
+  if (api_key() == ''){
       return (FALSE)
   } else {
     return (TRUE)
