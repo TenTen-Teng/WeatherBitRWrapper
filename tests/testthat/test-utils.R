@@ -33,17 +33,17 @@ test_that("test save a dataframe as a csv file", {
   unlink(temp_file)
 
   # Without directory and endpoint.
-  save_csv(mock_df)
+  expect_warning(save_csv(mock_df))
   expect_true(file.exists('./dataframe.csv'))
   file.remove('./dataframe.csv')
 
   # Without directory, but with endpoint.
-  save_csv(mock_df, endpoint = 'abc')
+  expect_warning(save_csv(mock_df, endpoint = 'abc'))
   expect_true(file.exists('./abc_dataframe.csv'))
   file.remove('./abc_dataframe.csv')
 
   # With params
-  save_csv(mock_df, params = c('abc', '123'))
+  expect_warning(save_csv(mock_df, params = c('abc', '123')))
   expect_true(file.exists('./abc_123.csv'))
   file.remove('./abc_123.csv')
 }
