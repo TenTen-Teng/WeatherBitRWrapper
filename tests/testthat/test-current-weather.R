@@ -83,3 +83,73 @@ test_that("get_current_temperature() handles bad API response", {
   
   expect_error(get_current_temperature("InvalidCity"))
 })
+
+# Test get_current_wind()
+test_that("get_current_wind() handles inputs", {
+  mock_response <- fake_response(
+    "https://mock-api.com/current",
+    verb = "GET",
+    status_code = 200,
+    headers = list(),
+    content = '
+      [
+        {
+          "city_name": "Vancouver",
+          "wind_spd": 3.2,
+          "wind_cdir_full": "Northwest",
+          "gust": 5.0
+        }
+      ]'
+  )
+  class(mock_response) <- "response"
+  
+  stub(get_current_wind, "connect_api_key", function() FALSE)
+  stub(get_current_wind, "GET", function(url, query = list()) mock_response)
+  
+  expect_error(get_current_wind("Vancouver"))
+  expect_error(get_current_wind("Vancouver", by = "unknown"))
+})
+
+test_that("get_current_wind() correctly handles API response", {
+  mock_response <- fake_response(
+    "https://mock-api.com/current",
+    verb = "GET",
+    status_code = 200,
+    headers = list(),
+    content = '
+      [
+        {
+          "city_name": "Vancouver",
+          "wind_spd": 3.2,
+          "wind_cdir_full": "Northwest",
+          "gust": 5.0
+        }
+      ]'
+  )
+  class(mock_response) <- "response"
+  
+  stub(get_current_wind, "connect_api_key", function() TRUE)
+  stub(get_current_wind, "GET", function(url, query = list()) mock_response)
+  
+  result <- get_current_wind("Vancouver")
+  
+  expect_s3_class(result, "data.frame")
+  expect_equal(result$wind_speed_mps[1], 3.2)
+  expect_equal(result$wind_direction[1], "Northwest")
+})
+
+test_that("get_current_wind() handles bad API response", {
+  mock_response <- fake_response(
+    "https://mock-api.com/current",
+    verb = "GET",
+    status_code = 404,
+    headers = list(),
+    content = '{ "error": "Invalid location" }'
+  )
+  class(mock_response) <- "response"
+  
+  stub(get_current_wind, "connect_api_key", function() TRUE)
+  stub(get_current_wind, "GET", function(url, query = list()) mock_response)
+  
+  expect_error(get_current_wind("InvalidCity"))
+})
