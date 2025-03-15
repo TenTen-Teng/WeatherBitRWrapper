@@ -22,7 +22,7 @@ forecast_url <- paste(base_url, endpoint, sep='')
 #' @param language Language, default as English
 #' @param unit Available units, default as Metric (Celsius, m/s, mm)
 #' @param day Forecast days, default as 16
-#' @importFrom magrittr %>%
+#' @importFrom httr GET
 get_forecast_by_city <- function(
   city, save_dir = '', language = 'en', unit = 'M', day = 16
   ){
@@ -116,6 +116,7 @@ get_forecast_by_city <- function(
 #' @param language Language, default as English
 #' @param unit Available units, default as Metric (Celsius, m/s, mm)
 #' @param day Forecast days, default as 16
+#' @importFrom httr GET
 get_forecast_by_lat_lon <- function(
   lat, lon, save_dir = '', language = 'en', unit = 'M', day = 16
   ){
