@@ -39,7 +39,9 @@ test_that("get_forecast_by_city() handle inputs", {
 
   expect_error(get_forecast_by_city("Raleigh,NC"))
   expect_error(get_forecast_by_city("Raleigh,NC", language = 'abc'))
+  expect_error(get_forecast_by_city("Raleigh,NC", language = 123))
   expect_error(get_forecast_by_city("Raleigh,NC", unit = 'abc'))
+  expect_error(get_forecast_by_city("Raleigh,NC", unit = 123))
   expect_error(get_forecast_by_city("Raleigh,NC", day = 20))
   expect_error(get_forecast_by_city("Raleigh,NC", day = -1))
   expect_error(get_forecast_by_city("Raleigh,NC", day = 'abc'))
