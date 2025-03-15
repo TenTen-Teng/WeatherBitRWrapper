@@ -13,6 +13,7 @@ test_that(
   }
 )
 
+# Test get_forecast_by_city()
 test_that("get_forecast_by_city() handle inputs", {
   # Mock a valid API response
   mock_response <- fake_response(
@@ -104,4 +105,195 @@ test_that("get_forecast_by_city() handle bad response", {
   expect_error(get_forecast_by_city("Raleigh,NC"))
 }
 )
+
+
+
+# Test get_forecast_by_lat_lon()
+test_that("get_forecast_by_lat_lon() handle inputs", {
+  # Mock a valid API response
+  mock_response <- fake_response(
+    "https://mock-api.com/forecast",
+    verb = "GET",
+    status_code = 200,
+    headers = list(),
+  content = '
+    [
+      {
+        "city_name": "Raleigh",
+        "data.datetime": "2024-03-15",
+        "data.temp": 25,
+        "data.humidity": 60
+      }
+  ]'
+  )
+  class(mock_response) <- "response"
+
+  # Mock both `connect_api_key` and `GET`
+  stub(get_forecast_by_lat_lon, "connect_api_key", function() FALSE)
+  stub(get_forecast_by_lat_lon, "GET", function(url, query = list()) mock_response)
+
+  expect_error(get_forecast_by_lat_lon(lat=38.123, lon=-78.543))
+  expect_error(get_forecast_by_lat_lon(lat=38.123, lon=-78.543, language = 'abc'))
+  expect_error(get_forecast_by_lat_lon(lat=38.123, lon=-78.543, unit = 'abc'))
+  expect_error(get_forecast_by_lat_lon(lat=38.123, lon=-78.543, day = 20))
+  expect_error(get_forecast_by_lat_lon(lat=38.123, lon=-78.543, day = -1))
+  expect_error(get_forecast_by_lat_lon(lat=38.123, lon=-78.543, day = 'abc'))
+}
+)
+
+test_that("get_forecast_by_lat_lon() correctly handles API response", {
+  # Mock a valid API response
+  mock_response <- fake_response(
+    "https://mock-api.com/forecast",
+    verb = "GET",
+    status_code = 200,
+    headers = list(),
+  content = '
+    [
+      {
+        "city_name": "Raleigh",
+        "data.datetime": "2024-03-15",
+        "data.temp": 25,
+        "data.humidity": 60
+      }
+  ]'
+  )
+  class(mock_response) <- "response"
+
+  # Mock both `connect_api_key` and `GET`
+  stub(get_forecast_by_lat_lon, "connect_api_key", function() TRUE)
+  stub(get_forecast_by_lat_lon, "GET", function(url, query = list()) mock_response)
+
+  result <- get_forecast_by_lat_lon(lat=38.123, lon=-78.543)
+
+  expect_s3_class(result, "data.frame")
+  expect_equal(result$city_name[1], "Raleigh")
+  expect_equal(result$data.datetime[1], "2024-03-15")
+  expect_equal(result$data.temp[1], 25)
+}
+)
+
+test_that("get_forecast_by_lat_lon() handle bad response", {
+  # Mock a valid API response
+  mock_response <- fake_response(
+    "https://mock-api.com/forecast",
+    verb = "GET",
+    status_code = 404,
+    headers = list(),
+  content = '
+    [
+      {
+        "city_name": "Raleigh",
+        "data.datetime": "2024-03-15",
+        "data.temp": 25,
+        "data.humidity": 60
+        "error": "error message"
+      }
+  ]'
+  )
+  class(mock_response) <- "response"
+
+  # Mock both `connect_api_key` and `GET`
+  stub(get_forecast_by_lat_lon, "connect_api_key", function() TRUE)
+  stub(get_forecast_by_lat_lon, "GET", function(url, query = list()) mock_response)
+
+  expect_error(get_forecast_by_lat_lon(lat=38.123, lon=-78.543))
+}
+)
+
+
+
+# Test get_forecast_by_postal_code
+test_that("get_forecast_by_postal_code() handle inputs", {
+  # Mock a valid API response
+  mock_response <- fake_response(
+    "https://mock-api.com/forecast",
+    verb = "GET",
+    status_code = 200,
+    headers = list(),
+  content = '
+    [
+      {
+        "city_name": "Raleigh",
+        "data.datetime": "2024-03-15",
+        "data.temp": 25,
+        "data.humidity": 60
+      }
+  ]'
+  )
+  class(mock_response) <- "response"
+
+  # Mock both `connect_api_key` and `GET`
+  stub(get_forecast_by_postal_code, "connect_api_key", function() FALSE)
+  stub(get_forecast_by_postal_code, "GET", function(url, query = list()) mock_response)
+
+  expect_error(get_forecast_by_postal_code(postal_code=27601, country='US'))
+  expect_error(get_forecast_by_postal_code(postal_code=27601, country='US', language = 'abc'))
+  expect_error(get_forecast_by_postal_code(lpostal_code=27601, country='US', unit = 'abc'))
+  expect_error(get_forecast_by_postal_code(postal_code=27601, country='US', day = 20))
+  expect_error(get_forecast_by_postal_code(postal_code=27601, country='US', day = -1))
+  expect_error(get_forecast_by_postal_code(postal_code=27601, country='US', day = 'abc'))
+}
+)
+
+test_that("get_forecast_by_postal_code() correctly handles API response", {
+  # Mock a valid API response
+  mock_response <- fake_response(
+    "https://mock-api.com/forecast",
+    verb = "GET",
+    status_code = 200,
+    headers = list(),
+  content = '
+    [
+      {
+        "city_name": "Raleigh",
+        "data.datetime": "2024-03-15",
+        "data.temp": 25,
+        "data.humidity": 60
+      }
+  ]'
+  )
+  class(mock_response) <- "response"
+
+  # Mock both `connect_api_key` and `GET`
+  stub(get_forecast_by_postal_code, "connect_api_key", function() TRUE)
+  stub(get_forecast_by_postal_code, "GET", function(url, query = list()) mock_response)
+
+  result <- get_forecast_by_postal_code(postal_code=27601, country='US')
+
+  expect_s3_class(result, "data.frame")
+  expect_equal(result$city_name[1], "Raleigh")
+  expect_equal(result$data.datetime[1], "2024-03-15")
+  expect_equal(result$data.temp[1], 25)
+}
+)
+
+test_that("get_forecast_by_postal_code() handle bad response", {
+  # Mock a valid API response
+  mock_response <- fake_response(
+    "https://mock-api.com/forecast",
+    verb = "GET",
+    status_code = 404,
+    headers = list(),
+  content = '
+    [
+      {
+        "city_name": "Raleigh",
+        "data.datetime": "2024-03-15",
+        "data.temp": 25,
+        "data.humidity": 60
+        "error": "error message"
+      }
+  ]'
+  )
+  class(mock_response) <- "response"
+
+  # Mock both `connect_api_key` and `GET`
+  stub(get_forecast_by_postal_code, "connect_api_key", function() TRUE)
+  stub(get_forecast_by_postal_code, "GET", function(url, query = list()) mock_response)
+
+  expect_error(get_forecast_by_postal_code(postal_code=27601, country='US'))
+}
+)
+
 
