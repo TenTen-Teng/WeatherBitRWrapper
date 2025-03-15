@@ -8,8 +8,8 @@
 
 ## Introduction
 
-## Example
-Please see our [examples](./example/example.qmd)
+## Vignettes
+Please see our [vignette](./Example.Rmd)
 
 ## Questions
 1. Where to find a Weatherbit API key?
