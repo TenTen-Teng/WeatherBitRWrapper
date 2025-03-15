@@ -4,30 +4,36 @@ library(jsonlite)
 library(dplyr)
 library(glue)
 
-source("R/constant.R")
-source("R/utils.R")
+sys.source("constant.R", envir = globalenv())
+sys.source("utils.R", envir = globalenv())
 
 # Define the API endpoint
 base_url <- "https://api.weatherbit.io/v2.0/"
 endpoint <- "current"
-current_weather_url <- glue(base_url, endpoint)
+endpoint_name <- "current_weather"
+current_weather_url <- paste(base_url, endpoint, sep = '')
 
-# Function to validate location input
+#' Function to validate location input
+#'
+#' @param location Location input as a string
+#' @param by Method to specify location ("city", "latlon", "postal")
 validate_location <- function(location, by) {
   if (missing(location) || location == "") stop("Error: Location must be provided.")
   
   if (by == "latlon") {
     coords <- unlist(strsplit(location, ","))
-    if (length(coords) != 2) stop("Error: Invalid lat/lon format. Use 'lat,lon'.")
-    if (!is.numeric(as.numeric(coords[1])) || !is.numeric(as.numeric(coords[2]))) {
-      stop("Error: Latitude and longitude must be numeric values.")
+    if (length(coords) != 2 || any(sapply(coords, function(x) is.na(as.numeric(x))))) {
+      stop("Error: Invalid lat/lon format. Use 'latitude,longitude' with numeric values.")
     }
   } else if (!(by %in% c("city", "postal"))) {
     stop("Error: Invalid 'by' parameter. Use 'city', 'latlon', or 'postal'.")
   }
 }
 
-# Function to process API response
+#' Function to process API response
+#'
+#' @param response API response object
+#' @return Parsed JSON response as a data frame
 process_api_response <- function(response) {
   if (response$status_code != 200) {
     content_data <- content(response, as = "text", encoding = "UTF-8")
@@ -36,18 +42,23 @@ process_api_response <- function(response) {
     stop(glue("Error: API request failed. Status code: {response$status_code}, Message: {error_message}"))
   }
   
-  data <- fromJSON(content(response, "text", encoding = "UTF-8"))$data
+  data <- fromJSON(content(response, as = "text", encoding = "UTF-8"))$data
   if (is.null(data)) stop("Error: No data returned. Check location or API key.")
   
   return(data)
 }
 
-# Function to get current temperature
-get_current_temperature <- function(location, api_key, by = "city", save_dir = "") {
+#' Function to get current temperature
+#'
+#' @param location Location input (city, lat/lon, or postal code)
+#' @param by Method to specify location ("city", "latlon", "postal")
+#' @param save_dir Optional directory to save result
+#' @return A tibble with temperature data
+get_current_temperature <- function(location, by = "city", save_dir = "") {
   if (!connect_api_key()) stop("Error: API key is missing. Set up your WeatherBit API key.")
   validate_location(location, by)
   
-  params <- list(key = api_key)
+  params <- list(key = api_key())
   if (by == "city") {
     params$city <- location
   } else if (by == "latlon") {
@@ -70,18 +81,23 @@ get_current_temperature <- function(location, api_key, by = "city", save_dir = "
   )
   
   if (save_dir != "") {
-    save_csv(result, save_dir, endpoint = "current_weather", params = c(location))
+    save_csv(result, save_dir, endpoint = endpoint_name, params = c(location))
   }
   
   return(result)
 }
 
-# Function to get current wind
-get_current_wind <- function(location, api_key, by = "city", save_dir = "") {
+#' Function to get current wind
+#'
+#' @param location Location input (city, lat/lon, or postal code)
+#' @param by Method to specify location ("city", "latlon", "postal")
+#' @param save_dir Optional directory to save result
+#' @return A tibble with wind data
+get_current_wind <- function(location, by = "city", save_dir = "") {
   if (!connect_api_key()) stop("Error: API key is missing. Set up your WeatherBit API key.")
   validate_location(location, by)
   
-  params <- list(key = api_key)
+  params <- list(key = api_key())
   if (by == "city") {
     params$city <- location
   } else if (by == "latlon") {
@@ -104,18 +120,23 @@ get_current_wind <- function(location, api_key, by = "city", save_dir = "") {
   )
   
   if (save_dir != "") {
-    save_csv(result, save_dir, endpoint = "current_weather", params = c(location))
+    save_csv(result, save_dir, endpoint = endpoint_name, params = c(location))
   }
   
   return(result)
 }
 
-# Function to get current precipitation
-get_current_precipitation <- function(location, api_key, by = "city", save_dir = "") {
+#' Function to get current precipitation
+#'
+#' @param location Location input (city, lat/lon, or postal code)
+#' @param by Method to specify location ("city", "latlon", "postal")
+#' @param save_dir Optional directory to save result
+#' @return A tibble with precipitation data
+get_current_precipitation <- function(location, by = "city", save_dir = "") {
   if (!connect_api_key()) stop("Error: API key is missing. Set up your WeatherBit API key.")
   validate_location(location, by)
   
-  params <- list(key = api_key)
+  params <- list(key = api_key())
   if (by == "city") {
     params$city <- location
   } else if (by == "latlon") {
@@ -138,7 +159,7 @@ get_current_precipitation <- function(location, api_key, by = "city", save_dir =
   )
   
   if (save_dir != "") {
-    save_csv(result, save_dir, endpoint = "current_weather", params = c(location))
+    save_csv(result, save_dir, endpoint = endpoint_name, params = c(location))
   }
   
   return(result)
