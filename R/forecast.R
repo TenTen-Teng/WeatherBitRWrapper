@@ -15,7 +15,13 @@ endpoint_name <- "forecast"
 # Get forecast url.
 forecast_url <- paste(base_url, endpoint, sep='')
 
-# Get forecast by city function.
+#' Get forecast by city function.
+#'
+#' @param city A city name
+#' @param save_dir The file path to save result
+#' @param language Language, default as English
+#' @param unit Available units, default as Metric (Celsius, m/s, mm)
+#' @param day Forecast days, default as 16
 get_forecast_by_city <- function(
   city, save_dir = '', language = 'en', unit = 'M', day = 16
   ){
@@ -101,7 +107,14 @@ get_forecast_by_city <- function(
 }
 
 
-# Get forecast by lat and lon.
+#' Get forecast by lat and lon.
+#'
+#' @param lat Latitude
+#' @param lon Longtitude
+#' @param save_dir The file path to save result
+#' @param language Language, default as English
+#' @param unit Available units, default as Metric (Celsius, m/s, mm)
+#' @param day Forecast days, default as 16
 get_forecast_by_lat_lon <- function(
   lat, lon, save_dir = '', language = 'en', unit = 'M', day = 16
   ){
@@ -195,7 +208,14 @@ get_forecast_by_lat_lon <- function(
 }
 
 
-# Get forecast by postal code.
+#' Get forecast by postal code.
+#'
+#' @param postal_code Post code
+#' @param country Country name
+#' @param save_dir The file path to save result
+#' @param language Language, default as English
+#' @param unit Available units, default as Metric (Celsius, m/s, mm)
+#' @param day Forecast days, default as 16
 get_forecast_by_postal_code <- function(
   postal_code, country, save_dir = '', language = 'en', unit = 'M', day = 16
   ){
@@ -284,7 +304,13 @@ get_forecast_by_postal_code <- function(
 }
 
 
-# Get forecast by city id.
+#' Get forecast by city id.
+#'
+#' @param city_id City ID
+#' @param save_dir The file path to save result
+#' @param language Language, default as English
+#' @param unit Available units, default as Metric (Celsius, m/s, mm)
+#' @param day Forecast days, default as 16
 get_forecast_by_city_id <- function(
   city_id, save_dir = '', language = 'en', unit = 'M', day = 16
   ){

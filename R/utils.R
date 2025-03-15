@@ -1,6 +1,6 @@
 # Helpful functions.
 
-# Connect API key function.
+#' Connect API key function.
 connect_api_key <- function(){
   # Check API key.
   if (api_key() == ''){
