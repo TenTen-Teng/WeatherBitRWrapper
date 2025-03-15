@@ -4,22 +4,33 @@ library(jsonlite)
 library(dplyr)
 library(glue)
 
+sys.source("R/constant.R", envir = globalenv())
+sys.source("R/utils.R", envir = globalenv())
+
 # Set up endpoint for forecast API.
 endpoint <- "forecast/daily"
 endpoint_name <- "forecast"
 
-# Get forecast url.
-forecast_url <- glue(base_url, endpoint)
 
-# Get forecast by city function.
+# Get forecast url.
+forecast_url <- paste(base_url, endpoint, sep='')
+
+#' Get forecast by city function.
+#'
+#' @param city A city name
+#' @param save_dir The file path to save result
+#' @param language Language, default as English
+#' @param unit Available units, default as Metric (Celsius, m/s, mm)
+#' @param day Forecast days, default as 16
+#' @importFrom magrittr %>%
 get_forecast_by_city <- function(
-  city, save_dir = '', language = 'en', unit = 'M', day = 16, plot = './'
+  city, save_dir = '', language = 'en', unit = 'M', day = 16
   ){
   # Check API key.
   if (!connect_api_key()) {
-      stop("Error: The WeatherBit API is empty! Please set up your WeatherBit
-        API key to your enviornment.
-        ")
+     stop("Error: The WeatherBit API is empty! Please set up your WeatherBit
+       API key to your enviornment.
+       ")
   }
 
   # Check inputs - language.
@@ -49,14 +60,14 @@ get_forecast_by_city <- function(
   }
 
   # Query.
-  params <- list(key = api_key)
+  params <- list(key = api_key())
   params$city <- city
   params$lang <- language
   params$units <- unit
   params$day <- day
 
   # Connect API.
-  response <- GET(forecast_url, query = params)
+  response <- httr::GET(forecast_url, query = params)
 
   if (response$status_code != 200){
     # Extract content as text
@@ -69,7 +80,7 @@ get_forecast_by_city <- function(
     error_message <- json_data$error
     stop(
         glue(
-            "Error: Connect to API request failed :(\n", " Status code is",
+            "Error: Connect to API request failed :(\n", " Status code is ",
             response$status_code, "\n", " Error message is", error_message
             )
         )
@@ -78,7 +89,7 @@ get_forecast_by_city <- function(
     }
 
   # Convert reponse to a dataframe.
-  dataframe <- fromJSON(content(response, "text", encoding = "UTF-8")) %>% as.data.frame
+  dataframe <- fromJSON(content(response, as = "text", encoding = "UTF-8")) %>% as.data.frame
 
   if (save_dir != ''){
     params = c(
@@ -97,7 +108,14 @@ get_forecast_by_city <- function(
 }
 
 
-# Get forecast by lat and lon.
+#' Get forecast by lat and lon.
+#'
+#' @param lat Latitude
+#' @param lon Longtitude
+#' @param save_dir The file path to save result
+#' @param language Language, default as English
+#' @param unit Available units, default as Metric (Celsius, m/s, mm)
+#' @param day Forecast days, default as 16
 get_forecast_by_lat_lon <- function(
   lat, lon, save_dir = '', language = 'en', unit = 'M', day = 16
   ){
@@ -140,7 +158,7 @@ get_forecast_by_lat_lon <- function(
   }
 
   # Query.
-  params <- list(key = api_key)
+  params <- list(key = api_key())
   params$lat <- lat
   params$lon <- lon
   params$lang <- language
@@ -191,7 +209,14 @@ get_forecast_by_lat_lon <- function(
 }
 
 
-# Get forecast by postal code.
+#' Get forecast by postal code.
+#'
+#' @param postal_code Post code
+#' @param country Country name
+#' @param save_dir The file path to save result
+#' @param language Language, default as English
+#' @param unit Available units, default as Metric (Celsius, m/s, mm)
+#' @param day Forecast days, default as 16
 get_forecast_by_postal_code <- function(
   postal_code, country, save_dir = '', language = 'en', unit = 'M', day = 16
   ){
@@ -229,7 +254,7 @@ get_forecast_by_postal_code <- function(
   }
 
   # Query.
-  params <- list(key = api_key)
+  params <- list(key = api_key())
   params$postal_code <- postal_code
   params$country <- country
   params$lang <- language
@@ -280,7 +305,13 @@ get_forecast_by_postal_code <- function(
 }
 
 
-# Get forecast by city id.
+#' Get forecast by city id.
+#'
+#' @param city_id City ID
+#' @param save_dir The file path to save result
+#' @param language Language, default as English
+#' @param unit Available units, default as Metric (Celsius, m/s, mm)
+#' @param day Forecast days, default as 16
 get_forecast_by_city_id <- function(
   city_id, save_dir = '', language = 'en', unit = 'M', day = 16
   ){
@@ -318,7 +349,7 @@ get_forecast_by_city_id <- function(
   }
 
   # Query.
-  params <- list(key = api_key)
+  params <- list(key = api_key())
   params$city_id <- city_id
   params$lang <- language
   params$units <- unit

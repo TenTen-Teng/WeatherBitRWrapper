@@ -1,7 +1,8 @@
-# Set base url.
+#' Base URL for WeatherBit API
+#' @export
 base_url <- "https://api.weatherbit.io/v2.0/"
 
-# Get API_KEY from environment.
+#' Get API_KEY from environment.
 api_key <- function(){
   Sys.getenv("WEATHERBIT_API_KEY")
 }
@@ -46,9 +47,9 @@ api_key <- function(){
 # zh - Chinese (Simplified)
 # zh-tw - Chinese (Traditional)
 valid_langs <- c(
-    'en', 'ar', 'az', 'be', 'bg', 'bs', 'ca', 'cz', 'da', 'de', 'fi', 'fr', 
-    'el', 'es', 'et', 'ja', 'hr', 'hu', 'id', 'it', 'is', 'iw', 'kw', 'lt', 
-    'nb', 'nl', 'pl', 'pt', 'ro', 'ru', 'sk', 'sl', 'sr', 'sv', 'tr', 'uk', 
+    'en', 'ar', 'az', 'be', 'bg', 'bs', 'ca', 'cz', 'da', 'de', 'fi', 'fr',
+    'el', 'es', 'et', 'ja', 'hr', 'hu', 'id', 'it', 'is', 'iw', 'kw', 'lt',
+    'nb', 'nl', 'pl', 'pt', 'ro', 'ru', 'sk', 'sl', 'sr', 'sv', 'tr', 'uk',
     'zh', 'zh-tw'
     )
 
