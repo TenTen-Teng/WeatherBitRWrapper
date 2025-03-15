@@ -17,7 +17,7 @@ forecast_url <- paste(base_url, endpoint, sep='')
 
 # Get forecast by city function.
 get_forecast_by_city <- function(
-  city, save_dir = '', language = 'en', unit = 'M', day = 16, plot = './'
+  city, save_dir = '', language = 'en', unit = 'M', day = 16
   ){
   # Check API key.
   if (!connect_api_key()) {
