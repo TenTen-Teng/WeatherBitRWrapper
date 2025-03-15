@@ -45,6 +45,128 @@ library(WeatherBitRWrapper)
 
 ## Fetch Alert
 
+There are 4 methods to fetch severe weather alerts data. A dataframe with detailed alerts information will be return.
+
+-   `weather_alert_lat`: Get alerts by latitude and longitude.
+-   `weather_alert_city`: Get alerts by city name.
+-   `weather_alert_postal`: Get alerts by postal code.
+-   `weather_alert_id`: Get alerts by city id.
+
+**Common arguments**:
+
+- `save_dir`: Directory path, default at ''. To save query result as a dataframe, assign `save_dir` a valid directory path.
+
+### Get alerts by latitude and longitude
+
+```{r eval=FALSE}
+weather_alert_lat <- (
+  lat, lon, save_dir = ''
+  )
+```
+
+**Example**:
+
+```{r warning=FALSE, collapse = TRUE}
+# Fetch weather alerts at [49.88307, 119.48568]
+
+df <- WeatherBitRWrapper::weather_alert_lat(lat=49.88307, lon=119.48568)
+
+kable(df[1:5, ]) %>% 
+  kable_styling(bootstrap_options = "striped", full_width = FALSE) %>%
+  scroll_box(height = "300px")
+```
+
+### Get alerts by city name
+
+```{r eval=FALSE}
+weather_alert_city <- (
+  city, state = NULL, country = NULL, save_dir = ''
+  )
+```
+
+**Example**:
+
+```{r warning=FALSE, collapse = TRUE}
+# Fetch weather alerts in Kelowna
+
+df <- WeatherBitRWrapper::weather_alert_city(city="Kelowna")
+
+kable(df[1:5, ]) %>% 
+  kable_styling(bootstrap_options = "striped", full_width = FALSE) %>%
+  scroll_box(height = "300px")
+```
+
+```{r warning=FALSE, collapse = TRUE}
+# Fetch weather alerts in Kelowna, BC
+
+df <- WeatherBitRWrapper::weather_alert_city(city="Kelowna", state="BC")
+
+kable(df[1:5, ]) %>% 
+  kable_styling(bootstrap_options = "striped", full_width = FALSE) %>%
+  scroll_box(height = "300px")
+```
+
+```{r warning=FALSE, collapse = TRUE}
+# Fetch weather alerts in Kelowna, BC, Canada
+
+df <- WeatherBitRWrapper::weather_alert_city(city="Kelowna", state="BC", country="CA")
+
+kable(df[1:5, ]) %>% 
+  kable_styling(bootstrap_options = "striped", full_width = FALSE) %>%
+  scroll_box(height = "300px")
+```
+
+### Get alerts by postal code
+
+```{r eval=FALSE}
+weather_alert_postal <- (
+  postal_code, country = NULL, save_dir = ''
+  )
+```
+
+**Example**:
+
+```{r warning=FALSE, collapse = TRUE}
+# Fetch weather alerts at V1V1V7
+
+df <- WeatherBitRWrapper::weather_alert_postal(postal_code="V1V1V7")
+
+kable(df[1:5, ]) %>% 
+  kable_styling(bootstrap_options = "striped", full_width = FALSE) %>%
+  scroll_box(height = "300px")
+```
+
+```{r warning=FALSE, collapse = TRUE}
+# Fetch weather alerts at V1V1V7, Canada
+
+df <- WeatherBitRWrapper::weather_alert_postal(postal_code="V1V1V7", country="CA")
+
+kable(df[1:5, ]) %>% 
+  kable_styling(bootstrap_options = "striped", full_width = FALSE) %>%
+  scroll_box(height = "300px")
+```
+
+### Get alerts by city id
+
+```{r eval=FALSE}
+weather_alert_id <- (
+  city_id, save_dir = ''
+  )
+```
+
+**Example**:
+
+```{r warning=FALSE, collapse = TRUE}
+# Fetch weather alerts at 8953360
+
+df <- WeatherBitRWrapper::weather_alert_id(city_id=8953360)
+
+kable(df[1:5, ]) %>% 
+  kable_styling(bootstrap_options = "striped", full_width = FALSE) %>%
+  scroll_box(height = "300px")
+```
+
+
 ## Fetch Forecast Weather
 
 There are 4 methods to fetch forecast weather data. A dataframe with forecast data will be return.
@@ -56,7 +178,7 @@ There are 4 methods to fetch forecast weather data. A dataframe with forecast da
 
 **Common arguments**:
 
-- `save_dir`: Directory path, default at ''. To save query result as a dataframe, assign `save_dir` a valid diectory path.
+- `save_dir`: Directory path, default at ''. To save query result as a dataframe, assign `save_dir` a valid directory path.
 - `language`: Weatherbit API supports a list of language as return. `English` is the default language.Other available options:
   Available language list:
     - `en` - [DEFAULT] English
