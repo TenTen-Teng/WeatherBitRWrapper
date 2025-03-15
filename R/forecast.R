@@ -4,9 +4,8 @@ library(jsonlite)
 library(dplyr)
 library(glue)
 
-#sys.source("R/constant.R", envir = globalenv())
-#sys.source("R/utils.R", envir = globalenv())
-
+sys.source("R/constant.R", envir = globalenv())
+sys.source("R/utils.R", envir = globalenv())
 
 # Set up endpoint for forecast API.
 endpoint <- "forecast/daily"
@@ -14,7 +13,7 @@ endpoint_name <- "forecast"
 
 
 # Get forecast url.
-forecast_url <- glue(base_url, endpoint)
+forecast_url <- paste(base_url, endpoint, sep='')
 
 # Get forecast by city function.
 get_forecast_by_city <- function(
@@ -22,9 +21,9 @@ get_forecast_by_city <- function(
   ){
   # Check API key.
   if (!connect_api_key()) {
-      stop("Error: The WeatherBit API is empty! Please set up your WeatherBit
-        API key to your enviornment.
-        ")
+     stop("Error: The WeatherBit API is empty! Please set up your WeatherBit
+       API key to your enviornment.
+       ")
   }
 
   # Check inputs - language.
@@ -54,7 +53,7 @@ get_forecast_by_city <- function(
   }
 
   # Query.
-  params <- list(key = api_key)
+  params <- list(key = api_key())
   params$city <- city
   params$lang <- language
   params$units <- unit
@@ -74,7 +73,7 @@ get_forecast_by_city <- function(
     error_message <- json_data$error
     stop(
         glue(
-            "Error: Connect to API request failed :(\n", " Status code is",
+            "Error: Connect to API request failed :(\n", " Status code is ",
             response$status_code, "\n", " Error message is", error_message
             )
         )
@@ -83,7 +82,7 @@ get_forecast_by_city <- function(
     }
 
   # Convert reponse to a dataframe.
-  dataframe <- fromJSON(content(response, "text", encoding = "UTF-8")) %>% as.data.frame
+  dataframe <- fromJSON(content(response, as = "text", encoding = "UTF-8")) %>% as.data.frame
 
   if (save_dir != ''){
     params = c(
@@ -145,7 +144,7 @@ get_forecast_by_lat_lon <- function(
   }
 
   # Query.
-  params <- list(key = api_key)
+  params <- list(key = api_key())
   params$lat <- lat
   params$lon <- lon
   params$lang <- language
@@ -234,7 +233,7 @@ get_forecast_by_postal_code <- function(
   }
 
   # Query.
-  params <- list(key = api_key)
+  params <- list(key = api_key())
   params$postal_code <- postal_code
   params$country <- country
   params$lang <- language
@@ -323,7 +322,7 @@ get_forecast_by_city_id <- function(
   }
 
   # Query.
-  params <- list(key = api_key)
+  params <- list(key = api_key())
   params$city_id <- city_id
   params$lang <- language
   params$units <- unit
