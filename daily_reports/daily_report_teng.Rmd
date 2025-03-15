@@ -4,6 +4,11 @@ output: html_document
 author: 'Teng'
 ---
 
+## March 15, 2025
+1. Add vignette (commit: 2d360bc609ba2a3c0f382cf5c7592d9f472219de)
+2. Update README (commit: 658854701422a41236776a86b8b7deb3afe06aa4)
+3. Update description (commit: d634aaabb9a195c7f4a82dff7f4bd0dff53cdf60)
+
 ## March 14, 2025
 1. Unit test for forecast.R:
    1. commit: c6e2fab91b0266ce97a20359516f4b8bb36db2c9

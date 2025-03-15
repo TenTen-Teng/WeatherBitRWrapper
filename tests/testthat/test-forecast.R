@@ -35,7 +35,7 @@ test_that("get_forecast_by_city() handle inputs", {
 
   # Mock both `connect_api_key` and `GET`
   stub(get_forecast_by_city, "connect_api_key", function() FALSE)
-  stub(get_forecast_by_city, "GET", function(url, query = list()) mock_response)
+  stub(get_forecast_by_city, "httr::GET", function(url, query = list()) mock_response)
 
   expect_error(get_forecast_by_city("Raleigh,NC"))
   expect_error(get_forecast_by_city("Raleigh,NC", language = 'abc'))
@@ -69,7 +69,7 @@ test_that("get_forecast_by_city() correctly handles API response", {
 
   # Mock both `connect_api_key` and `GET`
   stub(get_forecast_by_city, "connect_api_key", function() TRUE)
-  stub(get_forecast_by_city, "GET", function(url, query = list()) mock_response)
+  stub(get_forecast_by_city, "httr::GET", function(url, query = list()) mock_response)
 
   result <- get_forecast_by_city("Raleigh,NC")
 
@@ -102,7 +102,7 @@ test_that("get_forecast_by_city() handle bad response", {
 
   # Mock both `connect_api_key` and `GET`
   stub(get_forecast_by_city, "connect_api_key", function() TRUE)
-  stub(get_forecast_by_city, "GET", function(url, query = list()) mock_response)
+  stub(get_forecast_by_city, "httr::GET", function(url, query = list()) mock_response)
 
   expect_error(get_forecast_by_city("Raleigh,NC"))
 }

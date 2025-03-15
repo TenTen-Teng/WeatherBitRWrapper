@@ -269,9 +269,11 @@ ggplot(weather_data, aes(x = data.datetime)) +
 ```{r warning=FALSE}
 # Fetch next 16 days weather in Raleigh, NC in Chinese.
 
-df <- WeatherBitRWrapper::get_forecast_by_city("Raleigh,NC", language = "zh")
+df <- WeatherBitRWrapper::get_forecast_by_city("Raleigh,NC", language = "fr")
 
-datatable(df, options = list(scrollY = "300px", pageLength = 10))
+kable(df[1:16, ]) %>% 
+  kable_styling(bootstrap_options = "striped", full_width = FALSE) %>%
+  scroll_box(height = "300px")
 ```
 
 ```{r warning=FALSE}
