@@ -4,7 +4,28 @@ output: html_document
 author: 'Teng'
 ---
 
+## March 14, 2025
+1. Unit test for forecast.R:
+   1. commit: c6e2fab91b0266ce97a20359516f4b8bb36db2c9
+   2. commit: 84ce51732ea09c191f946f102bcc5fd154fc5f2d
+   3. commit: e1b36a8d8c93e2a2d165874b2ace25e8d13f589b
+   4. commit: 4c3df141553b49dbf493b0e5066280ab297f8929
+   5. commit: 8b39d8d0f7a28caa646dab572dcc2becc8e23be1
+
+## March 13, 2025
+1. Add unit test for constant.R (commit: 56586448305e9fc7683fc46b8aed15631cd3d0ba)
+2. Add unit test for utils.R (commit: c6e2fab91b0266ce97a20359516f4b8bb36db2c9)
+
+## March 12, 2025
+1. Merge personal branch to main (commit: be804acc5a71feeb9f1c443c965b3f49c0179fbd)
+2. Set up unit test stucture (commit: 869178fa52b1819782917799bd2449870ac3d537)
+3. Update source method (commit: f073cc6cba2e694fc779440a60eed0b6898f0c44)
+
+## March 11, 2025
+1. forecast functions (commit: def39e648c19eb23682007d4f2b8c7619eda73d5)
+2. Update daily report (commit: 02bb74893b8dbb95d3d7ec76b7ee89ce51b576fc)
+
 ## March 10, 2025
-1. Created `CONDUCT_OF_CODE.md` (commit: 024f646e9cd8f83464b734b9170f05c16bc2e67f)
-2. Created `CONTRIBUTING.md` (commit: 024f646e9cd8f83464b734b9170f05c16bc2e67f)
-3. Implemented `get_forecast_by_city` function. (commit: d7548be5f82d60dcd494a0609379af1764074baa)
+1. Initial push (commit: 1823d0ade5d3fbe6f8f3573c8b582fde2c7f7e00)
+2. Set up git workflow (commit: 499aa0a1a324d88168f29b0cc4cb142a02b6cc7e)
+3. Add constant and utils files (commit: c11c02ed040cd61b9a6eb01e1129bcd3cfaafa65)
