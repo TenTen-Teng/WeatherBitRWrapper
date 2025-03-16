@@ -1,10 +1,12 @@
 # WeatherBitWrapper
+![workflow](https://github.com/TenTen-Teng/WeatherBitRWrapper/actions/workflows/weatherbitrwrapper.yml/badge.svg)
 
 - [WeatherBitWrapper](#weatherbitwrapper)
   - [Introduction](#introduction)
-  - [Example](#example)
+  - [Vignettes](#vignettes)
   - [Questions](#questions)
   - [Contributor](#contributor)
+
 
 ## Introduction
 
