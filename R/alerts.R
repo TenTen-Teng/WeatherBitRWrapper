@@ -6,11 +6,10 @@ sys.source("R/constant.R", envir = globalenv())
 sys.source("R/utils.R", envir = globalenv())
 
 # Set up endpoint for alerts API
-endpoint <- "alerts"
-endpoint_name <- "alerts"
+alert_endpoint <- "alerts"
 
 # Get alerts url
-alerts_url <- paste(base_url, endpoint, sep='')
+alerts_url <- paste(base_url, alert_endpoint, sep='')
 
 # Get alerts by lat&lon
 weather_alert_lat <- function(lat, lon, save_dir = ''){
@@ -88,7 +87,7 @@ weather_alert_lat <- function(lat, lon, save_dir = ''){
     
     save_csv(
       dataframe = dataframe, dir = save_dir, 
-      endpoint = endpoint_name, params = params
+      alert_endpoint = alert_endpoint, params = params
     )
   }
   
@@ -185,7 +184,7 @@ weather_alert_city <- function(city, state = NULL, country = NULL, save_dir = ''
     
     save_csv(
       dataframe = dataframe, dir = save_dir, 
-      endpoint = endpoint_name, params = params
+      alert_endpoint = alert_endpoint, params = params
     )
   }
   
@@ -273,7 +272,7 @@ weather_alert_postal <- function(postal_code, country = NULL, save_dir = ''){
     
     save_csv(
       dataframe = dataframe, dir = save_dir, 
-      endpoint = endpoint_name, params = params
+      alert_endpoint = alert_endpoint, params = params
     )
   }
   
@@ -356,7 +355,7 @@ weather_alert_id <- function(city_id, save_dir = ''){
     
     save_csv(
       dataframe = dataframe, dir = save_dir, 
-      endpoint = endpoint_name, params = params
+      alert_endpoint = alert_endpoint, params = params
     )
   }
   
