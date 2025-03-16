@@ -11,7 +11,7 @@
 ## Introduction
 
 ## Vignettes
-Please see our [vignette](./Example.Rmd)
+Please see our [vignette](./vignettes/Example.Rmd)
 
 ## Questions
 1. Where to find a Weatherbit API key?

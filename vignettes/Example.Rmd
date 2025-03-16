@@ -75,7 +75,7 @@ df <- WeatherBitRWrapper::get_current_temperature("Vancouver")
 
 kable(df) %>% 
   kable_styling(bootstrap_options = "striped", full_width = FALSE) %>%
-  scroll_box(height = "300px")
+  scroll_box(height = "100px")
 ```
 
 ### Get Current Wind by location
@@ -92,7 +92,7 @@ df <- WeatherBitRWrapper::get_current_wind("Vancouver")
 
 kable(df) %>% 
   kable_styling(bootstrap_options = "striped", full_width = FALSE) %>%
-  scroll_box(height = "300px")
+  scroll_box(height = "100px")
 ```
 
 ### Get Current Precipitation by location
@@ -109,7 +109,7 @@ df <- WeatherBitRWrapper::get_current_precipitation("Vancouver")
 
 kable(df) %>% 
   kable_styling(bootstrap_options = "striped", full_width = FALSE) %>%
-  scroll_box(height = "300px")
+  scroll_box(height = "100px")
 ```
 
 ## Fetch Alert
@@ -142,7 +142,7 @@ df <- WeatherBitRWrapper::weather_alert_lat(lat=49.88307, lon=119.48568)
 
 kable(df[1:5, ]) %>% 
   kable_styling(bootstrap_options = "striped", full_width = FALSE) %>%
-  scroll_box(height = "300px")
+  scroll_box(height = "200px")
 ```
 
 ### Get alerts by city name
@@ -162,7 +162,7 @@ df <- WeatherBitRWrapper::weather_alert_city(city="Kelowna")
 
 kable(df[1:5, ]) %>% 
   kable_styling(bootstrap_options = "striped", full_width = FALSE) %>%
-  scroll_box(height = "300px")
+  scroll_box(height = "200px")
 ```
 
 ```{r warning=FALSE, collapse = TRUE}
@@ -172,7 +172,7 @@ df <- WeatherBitRWrapper::weather_alert_city(city="Kelowna", state="BC")
 
 kable(df[1:5, ]) %>% 
   kable_styling(bootstrap_options = "striped", full_width = FALSE) %>%
-  scroll_box(height = "300px")
+  scroll_box(height = "200px")
 ```
 
 ```{r warning=FALSE, collapse = TRUE}
@@ -182,7 +182,7 @@ df <- WeatherBitRWrapper::weather_alert_city(city="Kelowna", state="BC", country
 
 kable(df[1:5, ]) %>% 
   kable_styling(bootstrap_options = "striped", full_width = FALSE) %>%
-  scroll_box(height = "300px")
+  scroll_box(height = "200px")
 ```
 
 ### Get alerts by postal code
@@ -202,7 +202,7 @@ df <- WeatherBitRWrapper::weather_alert_postal(postal_code="V1V1V7")
 
 kable(df[1:5, ]) %>% 
   kable_styling(bootstrap_options = "striped", full_width = FALSE) %>%
-  scroll_box(height = "300px")
+  scroll_box(height = "200px")
 ```
 
 ```{r warning=FALSE, collapse = TRUE}
@@ -212,7 +212,7 @@ df <- WeatherBitRWrapper::weather_alert_postal(postal_code="V1V1V7", country="CA
 
 kable(df[1:5, ]) %>% 
   kable_styling(bootstrap_options = "striped", full_width = FALSE) %>%
-  scroll_box(height = "300px")
+  scroll_box(height = "200px")
 ```
 
 ### Get alerts by city id
@@ -232,7 +232,7 @@ df <- WeatherBitRWrapper::weather_alert_id(city_id=8953360)
 
 kable(df[1:5, ]) %>% 
   kable_styling(bootstrap_options = "striped", full_width = FALSE) %>%
-  scroll_box(height = "300px")
+  scroll_box(height = "200px")
 ```
 
 
