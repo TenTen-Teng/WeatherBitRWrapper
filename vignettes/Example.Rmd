@@ -17,7 +17,6 @@ library(magrittr)
 library(jsonlite)
 library(httr)
 library(glue)
-library(DT)
 library(knitr)
 library(kableExtra)
 ```
@@ -40,6 +39,10 @@ Next, you can ready to enjoy calling `WeatherBitRWrapper` by run the following c
 # Load the package
 library(WeatherBitRWrapper)
 ```
+
+The following workflow diagram illustrates the overall structure of the package, detailing how user inputs are processed through various function categories to interact with the **WeatherBit API** and return structured outputs.
+
+![Package Workflow](workflow.png)
 
 ## Fetch Current Weather
 
@@ -140,9 +143,9 @@ weather_alert_lat <- (
 
 df <- WeatherBitRWrapper::weather_alert_lat(lat=49.88307, lon=119.48568)
 
-kable(df[1:5, ]) %>% 
+kable(df) %>% 
   kable_styling(bootstrap_options = "striped", full_width = FALSE) %>%
-  scroll_box(height = "200px")
+  scroll_box(height = "100px")
 ```
 
 ### Get alerts by city name
@@ -160,9 +163,9 @@ weather_alert_city <- (
 
 df <- WeatherBitRWrapper::weather_alert_city(city="Kelowna")
 
-kable(df[1:5, ]) %>% 
+kable(df) %>% 
   kable_styling(bootstrap_options = "striped", full_width = FALSE) %>%
-  scroll_box(height = "200px")
+  scroll_box(height = "100px")
 ```
 
 ```{r warning=FALSE, collapse = TRUE}
@@ -170,9 +173,9 @@ kable(df[1:5, ]) %>%
 
 df <- WeatherBitRWrapper::weather_alert_city(city="Kelowna", state="BC")
 
-kable(df[1:5, ]) %>% 
+kable(df) %>% 
   kable_styling(bootstrap_options = "striped", full_width = FALSE) %>%
-  scroll_box(height = "200px")
+  scroll_box(height = "100px")
 ```
 
 ```{r warning=FALSE, collapse = TRUE}
@@ -180,9 +183,9 @@ kable(df[1:5, ]) %>%
 
 df <- WeatherBitRWrapper::weather_alert_city(city="Kelowna", state="BC", country="CA")
 
-kable(df[1:5, ]) %>% 
+kable(df) %>% 
   kable_styling(bootstrap_options = "striped", full_width = FALSE) %>%
-  scroll_box(height = "200px")
+  scroll_box(height = "100px")
 ```
 
 ### Get alerts by postal code
@@ -200,9 +203,9 @@ weather_alert_postal <- (
 
 df <- WeatherBitRWrapper::weather_alert_postal(postal_code="V1V1V7")
 
-kable(df[1:5, ]) %>% 
+kable(df) %>% 
   kable_styling(bootstrap_options = "striped", full_width = FALSE) %>%
-  scroll_box(height = "200px")
+  scroll_box(height = "100px")
 ```
 
 ```{r warning=FALSE, collapse = TRUE}
@@ -210,9 +213,9 @@ kable(df[1:5, ]) %>%
 
 df <- WeatherBitRWrapper::weather_alert_postal(postal_code="V1V1V7", country="CA")
 
-kable(df[1:5, ]) %>% 
+kable(df) %>% 
   kable_styling(bootstrap_options = "striped", full_width = FALSE) %>%
-  scroll_box(height = "200px")
+  scroll_box(height = "100px")
 ```
 
 ### Get alerts by city id
@@ -230,9 +233,9 @@ weather_alert_id <- (
 
 df <- WeatherBitRWrapper::weather_alert_id(city_id=8953360)
 
-kable(df[1:5, ]) %>% 
+kable(df) %>% 
   kable_styling(bootstrap_options = "striped", full_width = FALSE) %>%
-  scroll_box(height = "200px")
+  scroll_box(height = "100px")
 ```
 
 
@@ -336,7 +339,7 @@ ggplot(weather_data, aes(x = data.datetime)) +
 
 
 ```{r warning=FALSE}
-# Fetch next 16 days weather in Raleigh, NC in Chinese.
+# Fetch next 16 days weather in Raleigh, NC in French.
 
 df <- WeatherBitRWrapper::get_forecast_by_city("Raleigh,NC", language = "fr")
 
