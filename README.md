@@ -2,57 +2,11 @@
 
 - [WeatherBitWrapper](#weatherbitwrapper)
   - [Introduction](#introduction)
-  - [Functions Overview](#functions-overview)
-  - [Example Usage](#example-usage)
-  - [Vignettes](#vignettes)
+  - [Example](#example)
   - [Questions](#questions)
   - [Contributor](#contributor)
 
 ## Introduction
-**WeatherBitWrapper** is an R package designed to retrieve weather data from the **WeatherBit API**. It provides easy access to **current weather**, **severe weather alerts**, and **7-day forecasts**, returning structured **data frames** for easy analysis in R.
-
-## Functions Overview
-This package includes the following core functions:
-
-### 1. Current Weather Functions
-- **`get_current_temperature(location, by = "city")`** – Retrieves the current temperature, feels-like temperature, and dew point.
-- **`get_current_wind(location, by = "city")`** – Provides wind speed, direction, and gusts.
-- **`get_current_precipitation(location, by = "city")`** – Fetches precipitation rate, humidity, and cloud coverage.
-
-### 2. Severe Weather Alerts
-- **`weather_alert_lat(lat, lon)`** – Get alerts using latitude and longitude.
-- **`weather_alert_city(city, state = NULL, country = NULL)`** – Get alerts by city name.
-- **`weather_alert_postal(postal_code, country = NULL)`** – Get alerts by postal code.
-- **`weather_alert_id(city_id)`** – Get alerts using a city ID.
-
-### 3. 7-Day Forecast
-- **`get_forecast_by_city(city, day = 7)`** – Retrieves a forecast for a given city.
-- **`get_forecast_by_lat_lon(lat, lon, day = 7)`** – Retrieves a forecast using latitude/longitude.
-- **`get_forecast_by_postal_code(postal_code, country, day = 7)`** – Retrieves a forecast using postal code.
-- **`get_forecast_by_city_id(city_id, day = 7)`** – Retrieves a forecast using a city ID.
-
-## Example Usage  
-Below are quick examples for fetching current weather data, severe weather alerts, and 7-day forecasts. For a full guide on using this package, please refer to the **vignette**.
-
-#### Fetching Current Weather
-```r
-library(WeatherBitWrapper)
-
-# Get current temperature for New York
-get_current_temperature(location = "New York", by = "city")
-```
-
-#### Retrieving Severe Weather Alerts
-```r
-# Get severe weather alerts for Los Angeles
-weather_alert_city(city = "Los Angeles", state = "CA", country = "US")
-```
-
-#### Getting a 7-Day Forecast
-```r
-# Get a 7-day weather forecast for postal code 10001
-get_forecast_by_postal_code(postal_code = "10001", country = "US", day = 7)
-```
 
 ## Vignettes
 Please see our [vignette](./Example.Rmd)
