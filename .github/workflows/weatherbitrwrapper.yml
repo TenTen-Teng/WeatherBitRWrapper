@@ -3,10 +3,10 @@ name: R Package CI
 on:
   push:
     branches:
-      - teng
-#   pull_request:
-#     branches:
-#       - main
+      - main
+  pull_request:
+    branches:
+      - main
 
 jobs:
   test:
