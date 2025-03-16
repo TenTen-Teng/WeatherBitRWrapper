@@ -3,7 +3,7 @@ name: R Package CI
 on:
   push:
     branches:
-      - main
+      - teng
   pull_request:
     branches:
       - main
@@ -21,6 +21,10 @@ jobs:
 
       - name: Install dependencies
         uses: r-lib/actions/setup-r-dependencies@v2
+    
+      - name: Install devtools
+        run: install.packages("devtools")
+        shell: Rscript {0}
 
       - name: Run tests
         run: Rscript -e 'devtools::test()'
