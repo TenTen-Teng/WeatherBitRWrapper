@@ -4,8 +4,8 @@ library(jsonlite)
 library(dplyr)
 library(glue)
 
-sys.source("constant.R", envir = globalenv())
-sys.source("utils.R", envir = globalenv())
+sys.source("R/constant.R", envir = globalenv())
+sys.source("R/utils.R", envir = globalenv())
 
 # Define the API endpoint
 base_url <- "https://api.weatherbit.io/v2.0/"
@@ -35,17 +35,14 @@ validate_location <- function(location, by) {
 #' @param response API response object
 #' @return Parsed JSON response as a data frame
 process_api_response <- function(response) {
-  if (response$status_code != 200) {
-    content_data <- content(response, as = "text", encoding = "UTF-8")
-    json_data <- fromJSON(content_data)
-    error_message <- json_data$error
-    stop(glue("Error: API request failed. Status code: {response$status_code}, Message: {error_message}"))
+  content_data <- content(response, as = "text", encoding = "UTF-8")
+  json_data <- fromJSON(content_data, flatten = TRUE)
+  
+  if (!"data" %in% names(json_data) || length(json_data$data) == 0) {
+    stop("Error: No data returned. Check location or API key.")
   }
   
-  data <- fromJSON(content(response, as = "text", encoding = "UTF-8"))$data
-  if (is.null(data)) stop("Error: No data returned. Check location or API key.")
-  
-  return(data)
+  return(json_data$data)
 }
 
 #' Function to get current temperature

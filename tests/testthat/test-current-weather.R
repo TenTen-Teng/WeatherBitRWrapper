@@ -6,6 +6,9 @@ library(httr2)
 library(httptest)
 library(jsonlite)
 
+# Load currentweather.R to get function definitions
+# sys.source("R/currentweather.R", envir = globalenv())
+
 test_that("Test constant variables", {
   expect_equal(endpoint, "current")
   expect_equal(endpoint_name, "current_weather")
@@ -20,20 +23,22 @@ test_that("get_current_temperature() handles inputs", {
     status_code = 200,
     headers = list(),
     content = '
-      [
-        {
-          "city_name": "Vancouver",
-          "temp": 18,
-          "app_temp": 16,
-          "dewpt": 12
-        }
-      ]'
+      {
+        "data": [
+          {
+            "city_name": "Vancouver",
+            "temp": 18,
+            "app_temp": 16,
+            "dewpt": 12
+          }
+        ]
+      }'
   )
   class(mock_response) <- "response"
   
   # Mock API key and GET request
   stub(get_current_temperature, "connect_api_key", function() FALSE)
-  stub(get_current_temperature, "GET", function(url, query = list()) mock_response)
+  stub(get_current_temperature, "httr::GET", function(url, query = list()) mock_response)
   
   expect_error(get_current_temperature("Vancouver"))
   expect_error(get_current_temperature("Vancouver", by = "unknown"))
@@ -144,7 +149,7 @@ test_that("get_current_wind() handles bad API response", {
     verb = "GET",
     status_code = 404,
     headers = list(),
-    content = '{ "error": "Invalid location" }'
+    content = '{ "data": [], "error": "Invalid location" }'
   )
   class(mock_response) <- "response"
   
