@@ -11,7 +11,7 @@ library(jsonlite)
 
 test_that("Test constant variables", {
   expect_equal(current_endpoint, "current")
-  expect_equal(curreendpoint_name, "current_weather")
+  expect_equal(current_endpoint_name, "current_weather")
   expect_equal(current_weather_url, "https://api.weatherbit.io/v2.0/current")
 })
 
