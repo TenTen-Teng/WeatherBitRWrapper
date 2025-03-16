@@ -43,6 +43,75 @@ library(WeatherBitRWrapper)
 
 ## Fetch Current Weather
 
+There are 3 methods to fetch current weather data. A dataframe with key weather information will be returned.
+
+- `get_current_temperature`: Get current temperature, feels-like temperature, and dew point.
+- `get_current_wind`: Get wind speed, direction, and gusts.
+- `get_current_precipitation`: Get precipitation, humidity, and cloud coverage.
+
+**Common arguments**:
+
+- `location`: A **string** representing the location. It can be one of:
+  - A **city name** (e.g., `"Vancouver"`)
+  - A **latitude/longitude pair** (e.g., `"49.28,-123.12"`)
+  - A **postal code** (e.g., `"V6B1H6"`)
+- `by`: A **string** specifying the location type. Choose from:
+  - `"city"` for a city name.
+  - `"latlon"` for latitude/longitude.
+  - `"postal"` for a postal code.
+- `save_dir`: (Optional) **String**. If provided, saves the result as a `.csv` file at the given directory.
+
+### Get Current Temperature by location
+
+```{r eval=FALSE}
+get_current_temperature(location, by = "city", save_dir = "")
+```
+
+**Example**:
+
+```{r}
+# Fetch current temperature in Vancouver
+df <- WeatherBitRWrapper::get_current_temperature("Vancouver")
+
+kable(df) %>% 
+  kable_styling(bootstrap_options = "striped", full_width = FALSE) %>%
+  scroll_box(height = "300px")
+```
+
+### Get Current Wind by location
+
+```{r eval=FALSE}
+get_current_wind(location, by = "city", save_dir = "")
+```
+
+**Example**:
+
+```{r}
+# Fetch current wind data in Vancouver
+df <- WeatherBitRWrapper::get_current_wind("Vancouver")
+
+kable(df) %>% 
+  kable_styling(bootstrap_options = "striped", full_width = FALSE) %>%
+  scroll_box(height = "300px")
+```
+
+### Get Current Precipitation by location
+
+```{r eval=FALSE}
+get_current_precipitation(location, by = "city", save_dir = "")
+```
+
+**Example**:
+
+```{r}
+# Fetch current precipitation data in Vancouver
+df <- WeatherBitRWrapper::get_current_precipitation("Vancouver")
+
+kable(df) %>% 
+  kable_styling(bootstrap_options = "striped", full_width = FALSE) %>%
+  scroll_box(height = "300px")
+```
+
 ## Fetch Alert
 
 There are 4 methods to fetch severe weather alerts data. A dataframe with detailed alerts information will be return.
