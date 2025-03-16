@@ -57,3 +57,12 @@ output: html_document
 ### GitHub Commits 
 - https://github.com/TenTen-Teng/WeatherBitRWrapper/commit/cbf72c03cfc4c61c723d7c84df47f5f2ae2be8f7
 
+# Date: March 15, 2025
+
+### Work Summary
+- Debug unit test for alerts in `test_alerts.r`
+- Update Vignette documentation for alerts
+
+### GitHub Commits
+- https://github.com/TenTen-Teng/WeatherBitRWrapper/commit/96b12884387afc2caef9f89a6aaed16df1f41158
+- https://github.com/TenTen-Teng/WeatherBitRWrapper/commit/037e98794fdddb7c0588e12a420239e6e5fb592d
