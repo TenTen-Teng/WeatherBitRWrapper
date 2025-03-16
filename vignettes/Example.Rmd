@@ -42,7 +42,7 @@ library(WeatherBitRWrapper)
 
 The following workflow diagram illustrates the overall structure of the package, detailing how user inputs are processed through various function categories to interact with the **WeatherBit API** and return structured outputs.
 
-![Package Workflow](workflow.png)
+![WeatherBitRWrapper Workflow](../man/figures/workflow.png){width=70%}
 
 ## Fetch Current Weather
 
