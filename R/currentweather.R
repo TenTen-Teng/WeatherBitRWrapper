@@ -9,9 +9,9 @@ sys.source("R/utils.R", envir = globalenv())
 
 # Define the API endpoint
 base_url <- "https://api.weatherbit.io/v2.0/"
-endpoint <- "current"
-endpoint_name <- "current_weather"
-current_weather_url <- paste(base_url, endpoint, sep = '')
+current_endpoint <- "current"
+current_endpoint_name <- "current_weather"
+current_weather_url <- paste(base_url, current_endpoint, sep = '')
 
 #' Function to validate location input
 #'
@@ -78,7 +78,7 @@ get_current_temperature <- function(location, by = "city", save_dir = "") {
   )
   
   if (save_dir != "") {
-    save_csv(result, save_dir, endpoint = endpoint_name, params = c(location))
+    save_csv(result, save_dir, endpoint = current_endpoint_name, params = c(location))
   }
   
   return(result)
@@ -117,7 +117,7 @@ get_current_wind <- function(location, by = "city", save_dir = "") {
   )
   
   if (save_dir != "") {
-    save_csv(result, save_dir, endpoint = endpoint_name, params = c(location))
+    save_csv(result, save_dir, endpoint = current_endpoint_name, params = c(location))
   }
   
   return(result)
@@ -156,7 +156,7 @@ get_current_precipitation <- function(location, by = "city", save_dir = "") {
   )
   
   if (save_dir != "") {
-    save_csv(result, save_dir, endpoint = endpoint_name, params = c(location))
+    save_csv(result, save_dir, endpoint = current_endpoint_name, params = c(location))
   }
   
   return(result)
