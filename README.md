@@ -3,6 +3,7 @@
 
 - [WeatherBitWrapper](#weatherbitwrapper)
   - [Introduction](#introduction)
+  - [Installation](#installation)
   - [Functions Overview](#functions-overview)
     - [1. Current Weather Functions](#1-current-weather-functions)
     - [2. Severe Weather Alerts](#2-severe-weather-alerts)
@@ -13,10 +14,28 @@
       - [Getting a 7-Day Forecast](#getting-a-7-day-forecast)
   - [Vignettes](#vignettes)
   - [Questions](#questions)
+    - [How to set up API key to R environment?](#how-to-set-up-api-key-to-r-environment)
   - [Contributor](#contributor)
 
 ## Introduction
+
 **WeatherBitWrapper** is an R package designed to retrieve weather data from the **WeatherBit API**. It provides easy access to **current weather**, **severe weather alerts**, and **16-day forecasts**, returning structured **data frames** for easy analysis in R.
+
+## Installation
+
+```r
+# Install from GitHub
+library(remotes)
+devtools::install_github("TenTen-Teng/WeatherBitRWrapper")
+
+# Import library
+library('WeatherBitRWrapper')
+```
+
+> [!TIP] Sign up Weatherbit API Key
+> 
+> Go to Weatherbit [API website](https://www.weatherbit.io/). Sign up and get an API key. Then save the API key to R environment. Please refer [here](README.md#how-to-set-up-api-key-to-r-environment).
+
 
 ## Functions Overview
 This package includes the following core functions:
@@ -41,10 +60,14 @@ This package includes the following core functions:
 ## Example Usage  
 Below are quick examples for fetching current weather data, severe weather alerts, and 16-day forecasts. For a full guide on using this package, please refer to the [vignette](./vignettes/Example.Rmd).
 
-#### Fetching Current Weather
 ```r
+# Import library
 library(WeatherBitWrapper)
+```
 
+#### Fetching Current Weather
+
+```r
 # Get current temperature for New York
 get_current_temperature(location = "New York", by = "city")
 ```
@@ -65,14 +88,11 @@ get_forecast_by_postal_code(postal_code = "10001", country = "US", day = 16)
 Please see our [vignette](./vignettes/Example.Rmd)
 
 ## Questions
-1. Where to find a Weatherbit API key?
 
-   Go to Weatherbit [API website](https://www.weatherbit.io/). Sign up and you will get your API key.
+### How to set up API key to R environment?
 
-2. How to set up API key to R environment.
-
-   1. Set API key in the environment by opening the `.Renviron` file in RStudio using `file.edit("~/.Renviron")`
-   2. Add `WEATHERBIT_API_KEY=your_actual_api_key_here` and saving the file.
+1. Set API key in the environment by opening the `.Renviron` file in RStudio using `file.edit("~/.Renviron")`
+2. Add `WEATHERBIT_API_KEY=your_actual_api_key_here` and saving the file.
    
 ## Contributor
 <!-- readme: contributors -start -->
