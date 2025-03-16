@@ -1,8 +1,11 @@
 ---
-title: "Daily Report - Mar10"
+title: "Daily Report"
 output: html_document
 author: 'Teng'
 ---
+
+## March 16, 2025
+1. Set up Git Action CI (commit: bbf089fc775de5b9e49436ae7ba110dc848f69c8)
 
 ## March 15, 2025
 1. Add vignette (commit: 2d360bc609ba2a3c0f382cf5c7592d9f472219de)
