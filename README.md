@@ -1,4 +1,5 @@
 # WeatherBitWrapper
+![workflow](https://github.com/TenTen-Teng/WeatherBitRWrapper/actions/workflows/weatherbitrwrapper.yml/badge.svg)
 
 - [WeatherBitWrapper](#weatherbitwrapper)
   - [Introduction](#introduction)
@@ -55,7 +56,7 @@ get_forecast_by_postal_code(postal_code = "10001", country = "US", day = 7)
 ```
 
 ## Vignettes
-Please see our [vignette](./Example.Rmd)
+Please see our [vignette](./vignettes/Example.Rmd)
 
 ## Questions
 1. Where to find a Weatherbit API key?
