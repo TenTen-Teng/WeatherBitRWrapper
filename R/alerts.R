@@ -11,7 +11,12 @@ alert_endpoint <- "alerts"
 # Get alerts url
 alerts_url <- paste(base_url, alert_endpoint, sep='')
 
-# Get alerts by lat&lon
+#' Get alerts by lat&lon
+#'
+#' @param lat Latitude
+#' @param lon Longtitude
+#' @param save_dir The file path to save result
+#' @importFrom httr GET
 weather_alert_lat <- function(lat, lon, save_dir = ''){
   # Check API key.
   if (!connect_api_key()) {
@@ -95,7 +100,13 @@ weather_alert_lat <- function(lat, lon, save_dir = ''){
 }
 
 
-# Get alerts by city name
+#' Get alerts by city name
+#'
+#' @param city A city name
+#' @param state A state name or code, default is NULL
+#' @param country A country code, default is NULL
+#' @param save_dir The file path to save result
+#' @importFrom httr GET
 weather_alert_city <- function(city, state = NULL, country = NULL, save_dir = ''){
   # Check API key.
   if (!connect_api_key()) {
@@ -192,7 +203,12 @@ weather_alert_city <- function(city, state = NULL, country = NULL, save_dir = ''
 }
 
 
-# Get alerts by postal code
+#' Get alerts by postal code
+#'
+#' @param postal_code Postal code
+#' @param country A country code, default is NULL
+#' @param save_dir The file path to save result
+#' @importFrom httr GET
 weather_alert_postal <- function(postal_code, country = NULL, save_dir = ''){
   # Check API key.
   if (!connect_api_key()) {
@@ -280,7 +296,11 @@ weather_alert_postal <- function(postal_code, country = NULL, save_dir = ''){
 }
 
 
-# Get alerts by city id 
+#' Get alerts by city id
+#'
+#' @param postal_code City ID
+#' @param save_dir The file path to save result
+#' @importFrom httr GET 
 weather_alert_id <- function(city_id, save_dir = ''){
   # Check API key.
   if (!connect_api_key()) {
