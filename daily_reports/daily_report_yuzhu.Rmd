@@ -57,6 +57,8 @@ output: html_document
 ### GitHub Commits 
 - https://github.com/TenTen-Teng/WeatherBitRWrapper/commit/cbf72c03cfc4c61c723d7c84df47f5f2ae2be8f7
 
+
+
 # Date: March 15, 2025
 
 ### Work Summary
@@ -66,3 +68,18 @@ output: html_document
 ### GitHub Commits
 - https://github.com/TenTen-Teng/WeatherBitRWrapper/commit/96b12884387afc2caef9f89a6aaed16df1f41158
 - https://github.com/TenTen-Teng/WeatherBitRWrapper/commit/037e98794fdddb7c0588e12a420239e6e5fb592d
+
+
+
+# Date: March 16, 2025
+
+### Work Summary
+- Update documentation in alerts.r for creating R help document
+- Create package workflow chart 
+
+### GitHub Commits
+- https://github.com/TenTen-Teng/WeatherBitRWrapper/commit/afe5799b34e69816af7ea0e28adabf1da0ddef24
+- https://github.com/TenTen-Teng/WeatherBitRWrapper/commit/94bf596d370759dfa3634d44d9f76f8fe0e5bf00
+- https://github.com/TenTen-Teng/WeatherBitRWrapper/commit/d67d47a42262171fed9cab80c715530e6ae322d0
+
+
