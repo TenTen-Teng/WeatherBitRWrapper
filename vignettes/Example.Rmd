@@ -41,6 +41,10 @@ Next, you can ready to enjoy calling `WeatherBitRWrapper` by run the following c
 library(WeatherBitRWrapper)
 ```
 
+The following workflow diagram illustrates the overall structure of the package, detailing how user inputs are processed through various function categories to interact with the **WeatherBit API** and return structured outputs.
+
+![Package Workflow](workflow.png)
+
 ## Fetch Current Weather
 
 There are 3 methods to fetch current weather data. A dataframe with key weather information will be returned.
