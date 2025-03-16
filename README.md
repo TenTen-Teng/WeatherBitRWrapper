@@ -4,13 +4,19 @@
 - [WeatherBitWrapper](#weatherbitwrapper)
   - [Introduction](#introduction)
   - [Functions Overview](#functions-overview)
+    - [1. Current Weather Functions](#1-current-weather-functions)
+    - [2. Severe Weather Alerts](#2-severe-weather-alerts)
+    - [3. 16-Day Forecast](#3-16-day-forecast)
   - [Example Usage](#example-usage)
+      - [Fetching Current Weather](#fetching-current-weather)
+      - [Retrieving Severe Weather Alerts](#retrieving-severe-weather-alerts)
+      - [Getting a 7-Day Forecast](#getting-a-7-day-forecast)
   - [Vignettes](#vignettes)
   - [Questions](#questions)
   - [Contributor](#contributor)
 
 ## Introduction
-**WeatherBitWrapper** is an R package designed to retrieve weather data from the **WeatherBit API**. It provides easy access to **current weather**, **severe weather alerts**, and **7-day forecasts**, returning structured **data frames** for easy analysis in R.
+**WeatherBitWrapper** is an R package designed to retrieve weather data from the **WeatherBit API**. It provides easy access to **current weather**, **severe weather alerts**, and **16-day forecasts**, returning structured **data frames** for easy analysis in R.
 
 ## Functions Overview
 This package includes the following core functions:
@@ -26,14 +32,14 @@ This package includes the following core functions:
 - **`weather_alert_postal(postal_code, country = NULL)`** – Get alerts by postal code.
 - **`weather_alert_id(city_id)`** – Get alerts using a city ID.
 
-### 3. 7-Day Forecast
-- **`get_forecast_by_city(city, day = 7)`** – Retrieves a forecast for a given city.
-- **`get_forecast_by_lat_lon(lat, lon, day = 7)`** – Retrieves a forecast using latitude/longitude.
-- **`get_forecast_by_postal_code(postal_code, country, day = 7)`** – Retrieves a forecast using postal code.
-- **`get_forecast_by_city_id(city_id, day = 7)`** – Retrieves a forecast using a city ID.
+### 3. 16-Day Forecast
+- **`get_forecast_by_city(city, day = 16)`** – Retrieves a forecast for a given city.
+- **`get_forecast_by_lat_lon(lat, lon, day = 16)`** – Retrieves a forecast using latitude/longitude.
+- **`get_forecast_by_postal_code(postal_code, country, day = 16)`** – Retrieves a forecast using postal code.
+- **`get_forecast_by_city_id(city_id, day = 16)`** – Retrieves a forecast using a city ID.
 
 ## Example Usage  
-Below are quick examples for fetching current weather data, severe weather alerts, and 7-day forecasts. For a full guide on using this package, please refer to the **vignette**.
+Below are quick examples for fetching current weather data, severe weather alerts, and 16-day forecasts. For a full guide on using this package, please refer to the [vignette](./vignettes/Example.Rmd).
 
 #### Fetching Current Weather
 ```r
@@ -52,7 +58,7 @@ weather_alert_city(city = "Los Angeles", state = "CA", country = "US")
 #### Getting a 7-Day Forecast
 ```r
 # Get a 7-day weather forecast for postal code 10001
-get_forecast_by_postal_code(postal_code = "10001", country = "US", day = 7)
+get_forecast_by_postal_code(postal_code = "10001", country = "US", day = 16)
 ```
 
 ## Vignettes
@@ -60,9 +66,11 @@ Please see our [vignette](./vignettes/Example.Rmd)
 
 ## Questions
 1. Where to find a Weatherbit API key?
+
    Go to Weatherbit [API website](https://www.weatherbit.io/). Sign up and you will get your API key.
 
 2. How to set up API key to R environment.
+
    1. Set API key in the environment by opening the `.Renviron` file in RStudio using `file.edit("~/.Renviron")`
    2. Add `WEATHERBIT_API_KEY=your_actual_api_key_here` and saving the file.
    
