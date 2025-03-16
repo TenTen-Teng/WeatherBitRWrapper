@@ -1,15 +1,17 @@
 # WeatherBitWrapper
+![workflow](https://github.com/TenTen-Teng/WeatherBitRWrapper/actions/workflows/weatherbitrwrapper.yml/badge.svg)
 
 - [WeatherBitWrapper](#weatherbitwrapper)
   - [Introduction](#introduction)
-  - [Example](#example)
+  - [Vignettes](#vignettes)
   - [Questions](#questions)
   - [Contributor](#contributor)
+
 
 ## Introduction
 
 ## Vignettes
-Please see our [vignette](./Example.Rmd)
+Please see our [vignette](./vignettes/Example.Rmd)
 
 ## Questions
 1. Where to find a Weatherbit API key?
