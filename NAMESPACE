@@ -1,1 +1,22 @@
 exportPattern("^[[:alpha:]]+")
+export(
+  get_forecast_by_city,
+  get_forecast_by_lat_lon,
+  get_forecast_by_postal_code,
+  get_forecast_by_city_id,
+  validate_location,
+  process_api_response,
+  get_current_temperature,
+  get_current_wind,
+  get_current_precipitation,
+  weather_alert_lat,
+  weather_alert_city,
+  weather_alert_postal,
+  weather_alert_id
+)
+import(
+  httr,
+  jsonlite,
+  dplyr,
+  glue
+)

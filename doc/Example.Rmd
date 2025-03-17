@@ -131,7 +131,9 @@ There are 4 methods to fetch severe weather alerts data. A dataframe with detail
 ### Get alerts by latitude and longitude
 
 ```{r eval=FALSE}
-weather_alert_lat <- (lat, lon, save_dir = '')
+weather_alert_lat <- (
+  lat, lon, save_dir = ''
+  )
 ```
 
 **Example**:
