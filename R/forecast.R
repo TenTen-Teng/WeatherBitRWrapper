@@ -1,8 +1,8 @@
 # Load necessary packages
-library(httr)
-library(jsonlite)
-library(dplyr)
-library(glue)
+# library(httr)
+# library(jsonlite)
+# library(dplyr)
+# library(glue)
 
 sys.source("R/constant.R", envir = globalenv())
 sys.source("R/utils.R", envir = globalenv())
@@ -10,7 +10,6 @@ sys.source("R/utils.R", envir = globalenv())
 # Set up endpoint for forecast API.
 endpoint <- "forecast/daily"
 endpoint_name <- "forecast"
-
 
 # Get forecast url.
 forecast_url <- paste(base_url, endpoint, sep='')
@@ -22,7 +21,7 @@ forecast_url <- paste(base_url, endpoint, sep='')
 #' @param language Language, default as English
 #' @param unit Available units, default as Metric (Celsius, m/s, mm)
 #' @param day Forecast days, default as 16
-#' @import dplyr httr
+#' @import dplyr httr jsonlite glue
 get_forecast_by_city <- function(
   city, save_dir = '', language = 'en', unit = 'M', day = 16
   ){
@@ -116,7 +115,7 @@ get_forecast_by_city <- function(
 #' @param language Language, default as English
 #' @param unit Available units, default as Metric (Celsius, m/s, mm)
 #' @param day Forecast days, default as 16
-#' @import dplyr httr
+#' @import dplyr httr jsonlite glue
 get_forecast_by_lat_lon <- function(
   lat, lon, save_dir = '', language = 'en', unit = 'M', day = 16
   ){
@@ -218,7 +217,7 @@ get_forecast_by_lat_lon <- function(
 #' @param language Language, default as English
 #' @param unit Available units, default as Metric (Celsius, m/s, mm)
 #' @param day Forecast days, default as 16
-#' @import dplyr httr
+#' @import dplyr httr jsonlite glue
 get_forecast_by_postal_code <- function(
   postal_code, country, save_dir = '', language = 'en', unit = 'M', day = 16
   ){
@@ -314,7 +313,7 @@ get_forecast_by_postal_code <- function(
 #' @param language Language, default as English
 #' @param unit Available units, default as Metric (Celsius, m/s, mm)
 #' @param day Forecast days, default as 16
-#' @import dplyr httr
+#' @import dplyr httr jsonlite glue
 get_forecast_by_city_id <- function(
   city_id, save_dir = '', language = 'en', unit = 'M', day = 16
   ){
