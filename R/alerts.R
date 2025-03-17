@@ -17,6 +17,7 @@ alerts_url <- paste(base_url, alert_endpoint, sep='')
 #' @param lon Longtitude
 #' @param save_dir The file path to save result
 #' @importFrom httr GET
+#' @importFrom jsonlite fromJSON
 weather_alert_lat <- function(lat, lon, save_dir = ''){
   # Check API key.
   if (!connect_api_key()) {
@@ -107,6 +108,7 @@ weather_alert_lat <- function(lat, lon, save_dir = ''){
 #' @param country A country code, default is NULL
 #' @param save_dir The file path to save result
 #' @importFrom httr GET
+#' @importFrom jsonlite fromJSON
 weather_alert_city <- function(city, state = NULL, country = NULL, save_dir = ''){
   # Check API key.
   if (!connect_api_key()) {
@@ -209,6 +211,7 @@ weather_alert_city <- function(city, state = NULL, country = NULL, save_dir = ''
 #' @param country A country code, default is NULL
 #' @param save_dir The file path to save result
 #' @importFrom httr GET
+#' @importFrom jsonlite fromJSON
 weather_alert_postal <- function(postal_code, country = NULL, save_dir = ''){
   # Check API key.
   if (!connect_api_key()) {
@@ -300,7 +303,8 @@ weather_alert_postal <- function(postal_code, country = NULL, save_dir = ''){
 #'
 #' @param postal_code City ID
 #' @param save_dir The file path to save result
-#' @importFrom httr GET 
+#' @importFrom httr GET
+#' @importFrom jsonlite fromJSON
 weather_alert_id <- function(city_id, save_dir = ''){
   # Check API key.
   if (!connect_api_key()) {
