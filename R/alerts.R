@@ -1,7 +1,3 @@
-# Load necessary packages
-# library(httr)
-# library(jsonlite)
-
 sys.source("R/constant.R", envir = globalenv())
 sys.source("R/utils.R", envir = globalenv())
 
