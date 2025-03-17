@@ -1,6 +1,6 @@
 # Load necessary packages
-library(httr)
-library(jsonlite)
+# library(httr)
+# library(jsonlite)
 
 sys.source("R/constant.R", envir = globalenv())
 sys.source("R/utils.R", envir = globalenv())
@@ -16,7 +16,7 @@ alerts_url <- paste(base_url, alert_endpoint, sep='')
 #' @param lat Latitude
 #' @param lon Longtitude
 #' @param save_dir The file path to save result
-#' @importFrom httr GET
+#' @import dplyr httr jsonlite glue
 weather_alert_lat <- function(lat, lon, save_dir = ''){
   # Check API key.
   if (!connect_api_key()) {
@@ -106,7 +106,7 @@ weather_alert_lat <- function(lat, lon, save_dir = ''){
 #' @param state A state name or code, default is NULL
 #' @param country A country code, default is NULL
 #' @param save_dir The file path to save result
-#' @importFrom httr GET
+#' @import dplyr httr jsonlite glue
 weather_alert_city <- function(city, state = NULL, country = NULL, save_dir = ''){
   # Check API key.
   if (!connect_api_key()) {
@@ -208,7 +208,7 @@ weather_alert_city <- function(city, state = NULL, country = NULL, save_dir = ''
 #' @param postal_code Postal code
 #' @param country A country code, default is NULL
 #' @param save_dir The file path to save result
-#' @importFrom httr GET
+#' @import dplyr httr jsonlite glue
 weather_alert_postal <- function(postal_code, country = NULL, save_dir = ''){
   # Check API key.
   if (!connect_api_key()) {
@@ -300,7 +300,7 @@ weather_alert_postal <- function(postal_code, country = NULL, save_dir = ''){
 #'
 #' @param postal_code City ID
 #' @param save_dir The file path to save result
-#' @importFrom httr GET 
+#' @import dplyr httr jsonlite glue
 weather_alert_id <- function(city_id, save_dir = ''){
   # Check API key.
   if (!connect_api_key()) {

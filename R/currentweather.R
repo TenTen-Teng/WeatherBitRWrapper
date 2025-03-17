@@ -1,8 +1,8 @@
 # Load necessary packages
-library(httr)
-library(jsonlite)
-library(dplyr)
-library(glue)
+# library(httr)
+# library(jsonlite)
+# library(dplyr)
+# library(glue)
 
 sys.source("R/constant.R", envir = globalenv())
 sys.source("R/utils.R", envir = globalenv())
@@ -17,6 +17,7 @@ current_weather_url <- paste(base_url, current_endpoint, sep = '')
 #'
 #' @param location Location input as a string
 #' @param by Method to specify location ("city", "latlon", "postal")
+#' @import dplyr httr jsonlite glue
 validate_location <- function(location, by) {
   if (missing(location) || location == "") stop("Error: Location must be provided.")
   
@@ -34,6 +35,7 @@ validate_location <- function(location, by) {
 #'
 #' @param response API response object
 #' @return Parsed JSON response as a data frame
+#' @import dplyr httr jsonlite glue
 process_api_response <- function(response) {
   content_data <- content(response, as = "text", encoding = "UTF-8")
   json_data <- fromJSON(content_data, flatten = TRUE)
@@ -51,6 +53,7 @@ process_api_response <- function(response) {
 #' @param by Method to specify location ("city", "latlon", "postal")
 #' @param save_dir Optional directory to save result
 #' @return A tibble with temperature data
+#' @import dplyr httr jsonlite glue
 get_current_temperature <- function(location, by = "city", save_dir = "") {
   if (!connect_api_key()) stop("Error: API key is missing. Set up your WeatherBit API key.")
   validate_location(location, by)
@@ -90,6 +93,7 @@ get_current_temperature <- function(location, by = "city", save_dir = "") {
 #' @param by Method to specify location ("city", "latlon", "postal")
 #' @param save_dir Optional directory to save result
 #' @return A tibble with wind data
+#' @import dplyr httr jsonlite glue
 get_current_wind <- function(location, by = "city", save_dir = "") {
   if (!connect_api_key()) stop("Error: API key is missing. Set up your WeatherBit API key.")
   validate_location(location, by)
@@ -129,6 +133,7 @@ get_current_wind <- function(location, by = "city", save_dir = "") {
 #' @param by Method to specify location ("city", "latlon", "postal")
 #' @param save_dir Optional directory to save result
 #' @return A tibble with precipitation data
+#' @import dplyr httr jsonlite glue
 get_current_precipitation <- function(location, by = "city", save_dir = "") {
   if (!connect_api_key()) stop("Error: API key is missing. Set up your WeatherBit API key.")
   validate_location(location, by)
