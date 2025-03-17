@@ -21,12 +21,19 @@
 
 **WeatherBitWrapper** is an R package designed to retrieve weather data from the **WeatherBit API**. It provides easy access to **current weather**, **severe weather alerts**, and **16-day forecasts**, returning structured **data frames** for easy analysis in R.
 
+The following workflow diagram illustrates the overall structure of the package, detailing how user inputs are processed through various function categories to interact with the **WeatherBit API** and return structured outputs.
+
+![WeatherBitRWrapper Workflow](./man/figures/workflow.png)
+
 ## Installation
 
 ```r
 # Install from GitHub
 library(remotes)
 devtools::install_github("TenTen-Teng/WeatherBitRWrapper")
+
+# Or, install from WeatherBitRWrapper_0.1.0.tar.gz file
+install.packages("WeatherBitRWrapper_0.1.0.tar.gz")
 
 # Import library
 library('WeatherBitRWrapper')
