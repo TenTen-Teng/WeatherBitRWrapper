@@ -32,9 +32,6 @@ The following workflow diagram illustrates the overall structure of the package,
 library(remotes)
 devtools::install_github("TenTen-Teng/WeatherBitRWrapper")
 
-# Or, install from WeatherBitRWrapper_0.1.0.tar.gz file
-install.packages("WeatherBitRWrapper_0.1.0.tar.gz")
-
 # Import library
 library('WeatherBitRWrapper')
 ```
